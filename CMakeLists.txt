@@ -22,10 +22,18 @@ FetchContent_Declare(
     GIT_PROGRESS TRUE
 )
 FetchContent_MakeAvailable(fmtlib)
+find_package(MKL CONFIG REQUIRED)
 
 function(add_code name)
     add_executable(${name} ${name}.cpp)
-    target_link_libraries(${name} tbb fmt::fmt fftw3)
+    target_link_libraries(${name} fmt::fmt fftw3)
+endfunction()
+
+function(add_mkl_code name)
+    add_executable(${name} ${name}.cpp)
+    #target_include_directories(${name} PRIVATE ${MKL_INCLUDE_DIRECTORIES})
+    target_include_directories(${name} PUBLIC $<TARGET_PROPERTY:MKL::MKL,INTERFACE_INCLUDE_DIRECTORIES>)
+    target_link_libraries(${name} PRIVATE fmt::fmt $<LINK_ONLY:MKL::MKL>)
 endfunction()
 
 function(add_cuda_code name)
@@ -34,5 +42,6 @@ function(add_cuda_code name)
 endfunction()
 
 add_code(fft_cpu)
+add_mkl_code(fft_mkl)
 add_code(generate)
 add_cuda_code(fft_cuda)
