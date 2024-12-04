@@ -22,7 +22,7 @@ Relative speed-up of GPU acceleration against CPU-based implementations
 | 1M | 8x |3x
 | 5M | 10x |3.25x|
 | 10M | 18.4x |3.8x|
-| 50M | 17.6x |3.41|
-| 100M | 14.94 |3.68|
+| 50M | 17.6x |3.41x|
+| 100M | 14.94x |3.68x|
 | 500M | 41.9x |4.7x|
-| 1B | 44.3 |16.7|
+| 1B | 44.3x |16.7x|
